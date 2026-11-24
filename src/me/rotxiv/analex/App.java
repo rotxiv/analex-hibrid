@@ -1,4 +1,6 @@
-import view.Principal;
+package me.rotxiv.analex;
+
+import me.rotxiv.analex.view.Principal;
 import javax.swing.SwingUtilities;
 
 public class App {

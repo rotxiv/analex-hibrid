@@ -1,4 +1,4 @@
-package data;
+package me.rotxiv.analex.data;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

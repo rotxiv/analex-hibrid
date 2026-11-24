@@ -1,4 +1,4 @@
-package application;
+package me.rotxiv.analex.application;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

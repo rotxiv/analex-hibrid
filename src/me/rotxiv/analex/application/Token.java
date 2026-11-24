@@ -1,4 +1,4 @@
-package application;
+package me.rotxiv.analex.application;
 
 public class Token {
         //Para el NOMBRE del token. 

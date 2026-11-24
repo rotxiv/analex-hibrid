@@ -1,4 +1,4 @@
-package view;
+package me.rotxiv.analex.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -20,10 +20,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
-import application.Analex;
-import application.Cinta;
-import application.Token;
-import data.File;
+import me.rotxiv.analex.application.Analex;
+import me.rotxiv.analex.application.Cinta;
+import me.rotxiv.analex.application.Token;
+import me.rotxiv.analex.data.File;
 
 public class Principal extends JFrame {
 

@@ -1,4 +1,4 @@
-package application;
+package me.rotxiv.analex.application;
 
 public class Analex {   //Es una cinta de tokens
     private static final int ACEPTAR_TOKEN = -1;
