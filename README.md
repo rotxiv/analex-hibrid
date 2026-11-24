@@ -41,20 +41,38 @@ No se utilizan bibliotecas externas adicionales.
 ### Desde Visual Studio Code
 
 1. Abra la carpeta del proyecto.
-2. Abra `src/App.java`.
+2. Abra `src/me/rotxiv/analex/App.java`.
 3. Use **Run Java** o presione `F5`.
 4. Seleccione la configuración `App` si Visual Studio Code lo solicita.
 
 También puede usar la configuración incluida en `.vscode/launch.json`.
 
-### Desde la terminal
+### Compilar y crear un JAR desde PowerShell
 
-Desde la carpeta raíz del proyecto:
+Abra PowerShell en la carpeta raíz del proyecto y ejecute:
 
-```bat
-javac -d bin src\App.java src\application\*.java src\data\*.java src\view\*.java
-java -cp bin App
+```powershell
+New-Item -ItemType Directory -Force .\bin | Out-Null
+$fuentes = Get-ChildItem .\src -Recurse -Filter *.java | ForEach-Object { $_.FullName }
+
+javac -encoding UTF-8 -d .\bin $fuentes
+if ($LASTEXITCODE -ne 0) { throw "Falló la compilación." }
+
+"Main-Class: me.rotxiv.analex.App`r`n" | Set-Content -Encoding ASCII .\bin\MANIFEST.MF
+jar cfm .\Analex.jar .\bin\MANIFEST.MF -C .\bin me
 ```
+
+El comando genera `Analex.jar` en la carpeta raíz. Para abrir la aplicación,
+ejecute:
+
+```powershell
+java -jar .\Analex.jar
+```
+
+Se requiere tener el JDK instalado y `javac`, `jar` y `java` disponibles en el
+`PATH`. Ejecutar el proyecto desde VS Code no necesariamente crea un JAR; el
+comando anterior compila las fuentes y empaqueta explícitamente la clase de
+inicio.
 
 ## Uso
 
@@ -141,29 +159,34 @@ void evaluar() {
 ```text
 analex-hibrid/
 ├── src/
-│   ├── App.java
-│   ├── application/
-│   │   ├── Analex.java
-│   │   ├── Cinta.java
-│   │   └── Token.java
-│   ├── data/
-│   │   └── File.java
-│   └── view/
-│       └── Principal.java
+│   └── me/rotxiv/analex/
+│       ├── App.java
+│       ├── application/
+│       │   ├── Analex.java
+│       │   ├── Cinta.java
+│       │   └── Token.java
+│       ├── data/
+│       │   └── File.java
+│       └── view/
+│           └── Principal.java
 ├── external/
 │   ├── java/
 │   └── pascal/
 ├── bin/
+├── Analex.jar
 ├── lib/
 ├── .vscode/
 └── README.md
 ```
 
-- `src/application`: lógica del analizador léxico.
-- `src/data`: carga de archivos.
-- `src/view`: interfaz gráfica.
+- `src/me/rotxiv/analex`: paquete base de la aplicación.
+- `src/me/rotxiv/analex/application`: lógica del analizador léxico.
+- `src/me/rotxiv/analex/data`: carga de archivos.
+- `src/me/rotxiv/analex/view`: interfaz gráfica.
 - `external`: programas de prueba en las sintaxis admitidas.
 - `bin`: archivos Java compilados.
+- `Analex.jar`: aplicación empaquetada y ejecutable, creada con el comando
+  anterior.
 - `lib`: librerías externas opcionales en formato JAR.
 
 ## Alcance
